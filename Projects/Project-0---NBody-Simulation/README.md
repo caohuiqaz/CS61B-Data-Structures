@@ -4,6 +4,6 @@ Compile using:
 javac NBody.java
 
 Run using:
-java NBody
+java NBody 15778800.0 25000.0 data/planets.txt
 
 If any doubt, remember google is your friend.
