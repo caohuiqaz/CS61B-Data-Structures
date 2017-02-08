@@ -303,4 +303,4 @@ public class Editor extends Application
 	{
 		launch(args);
 	}
-}
+} 
