@@ -1,0 +1,18 @@
+Kyle Kingsbury
+First, please only submit one copy - not a folder in a folder.  I do not know which one to grade, so I picked one and hoped it was the better version.  If it was an accident, let me know somehow.
+
+There is no need to overkill an assignment - in this one, you created a Dictionary class, a balanced BST, multiple methods for finding words, an Index...  It all becomes very complex to handle, and especially complex for another person to understand.  Sometimes, you just have to make a choice in terms of implementation - it'll save you coding time, and others the time of understanding what you did.  Also, simpler is often times better.  For example, instead of creating a whole new Dictionary class, you could have provided some way to look up parts of a String in your BST class.  That way, another person only has to look at one new method, rather than a whole class.
+
+Find a good mix between optimization, style, and simplicity.  Somewhere in there is code that is efficient, while at the same time easy to understand.
+
+On top of all that, since you made Dictionary private, I have to use your main to run your optimized version.  What if I wanted to port my Boggle solver to another program?  -4
+
+Doing everything you did takes skill.  A balanced tree is difficult to make.  Prefix checking is implemented in Dictionary.  +5
+
+In the same vein, there's no need to comment every single line of code.  Comment enough that someone can understand what blocks of code can do.  If a line of code is simple, no need to comment (and clutter up the page).  Ex: line 92 of Boggle.java doesn't need to be commented, since (via the method name) it's obvious what is being done.
+
+In the directions, it says your program should print out all words less than 9 letters - which includes one or two letter words.  In other words, MIN_WORD_LENGTH should be 1.  -1
+
+---
+
+Final grade: 50/50

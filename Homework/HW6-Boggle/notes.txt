@@ -1,0 +1,63 @@
+Kyle Kingsbury
+PS5
+
+Inserting a sorted sequence into a binary search tree without any balancing
+operations ensures that the tree will be linear, i.e. each node has only one
+child. Hence, operations are O(n) instead of O(log n). This is because for
+every term a[n] in the input sequence, a[n+1] > a[n]. Hence, a[n] > a[x] for
+all x < n. Hence, an insert operation will *always* insert to the right of
+every existing node, and produce a linear tree.
+
+My BinarySearchTree implements a balanced AVL tree, without keeping track of
+the heights of the respective subtrees. It does this through some clever case
+analysis. The difference in speed as compared to tracking the heights is
+negligible, and this implementation saves memory.
+
+INITIAL APPROACH:
+
+Searching directly for words of all lengths is a process that takes, on
+average, the same time to locate all terms. Hence, the time between locating
+terms is relatively high. Because we are attempting to locate the maximum
+number of terms within the given time limit, my implementation performs an
+exhaustive search for all terms less than a constant length (6 characters).
+This search can be performed in only a few seconds. Because smaller words are
+far more likely to occur in the board than longer ones, this search also
+returns a large proportion of the potential matches.
+
+The remaining time is given to searching for terms of increasing length. While
+this implementation repeats recursive calls, it is actually much faster than
+the "more efficient" general case search. Without optimizing for shorter
+terms, a 1-minute search on test boards returns approximately 18% of the words
+for those boards. With the search biased for shorter terms, it locates
+approximately 98% of the terms within one minute.
+
+The initial maximum word length can be adjusted depending on the speed of the
+computer to yield optimum results. 6 characters is a conservative estimate,
+and 7 performs marginally better on my (fast) computer.
+
+REFINED APPROACH:
+
+At every recursive search call, we can assert that the current string of
+characters is not a valid word candidate, and hence any further searching is
+useless. To do this, we build an array of word prefixes of length 1, 2, 3,
+etc, and fold it into the class Dictionary which also contains the complete
+dictionary tree. This means that, at worse case, (8-1)*n extra recursive calls
+are made for a string of length n, instead of roughly 8^n calls. To limit the
+time spent building the index, a minimum length is established for a prefix.
+
+This approach solves the entire search tree, with no word length limitations,
+in about .273 seconds. The search function is O(1) with respect to the word
+length limit where n is greater than the length of the longest word in the
+dictionary, as opposed to an exponential function. This method results in
+additional preprocessing time and higher memory utilization due to the extra
+prefix BSTs, but much faster search execution.
+
+---
+
+Note that the original algorithm was limited to words of 9 characters or less.
+The optimized algorithm was limited only by the dimensions of the board.
+
+Time to search boards (seconds):
+		Parse	 Search	  Total
+Original:	1.864	172.653	174.517
+Optimized:	2.849	  0.265	  3.114
